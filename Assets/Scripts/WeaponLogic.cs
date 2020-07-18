@@ -5,10 +5,13 @@ using UnityEngine;
 public class WeaponLogic : MonoBehaviour
 {
     Rigidbody2D rb;
+    //Vector2 mousePos;
+    GameObject player;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         //StartCoroutine(WeaponFlying());
+        //player = 
     }
 
     // Update is called once per frame
@@ -20,7 +23,7 @@ public class WeaponLogic : MonoBehaviour
     {
         while (true)
         {
-            rb.AddForce(transform.forward);
+            rb.AddForce(transform.up, ForceMode2D.Impulse);
         }
     }
 }
