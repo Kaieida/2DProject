@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class WeaponSystem : MonoBehaviour
 {
-    /*private static WeaponSystem instance;
-    public static Player Instance { get => instance; set => instance = value; }*/
+    private static WeaponSystem instance;
+    public static WeaponSystem Instance { get => instance; set => instance = value; }
     public GameObject weapon;
     public Camera cam;
-    Vector2 mousePos;
+    public Vector2 mousePos;
+    public GameObject weaponObject;
     Vector2 playerPos;
+    public List<GameObject> weaponAmount = new List<GameObject>();
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         StartCoroutine(Attacking());
@@ -25,10 +34,11 @@ public class WeaponSystem : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && weaponAmount.Count <= 5)
             {
-                //Instantiate(weapon, mousePos - playerPos, Quaternion.identity);
-                Debug.Log(mousePos);
+                weaponObject = Instantiate(weapon, playerPos + new Vector2(0, 0.5f), Quaternion.identity);
+                weaponAmount.Add(weaponObject);
+                //yield return new WaitForSeconds(3f);
             }
             yield return null;
         }

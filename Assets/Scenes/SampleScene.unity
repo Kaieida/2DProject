@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 948181329}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,3 +312,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 2143395515802745250, guid: 34a9c273c60d5784ea694b1aafaaa994, type: 3}
   cam: {fileID: 519420031}
+  mousePos: {x: 0, y: 0}
