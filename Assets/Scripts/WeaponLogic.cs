@@ -23,7 +23,7 @@ public class WeaponLogic : MonoBehaviour
     {
         rb.AddForce(WeaponSystem.Instance.mousePos, ForceMode2D.Impulse);
         yield return new WaitForSeconds(1f);
-        rb.AddForce(player.transform.position*2, ForceMode2D.Impulse);
+        rb.AddForce((player.transform.position-transform.position+new Vector3(0, 0.5f)) *2, ForceMode2D.Impulse);
         StartCoroutine(DestroyWeapon());
     }
     IEnumerator DestroyWeapon()
