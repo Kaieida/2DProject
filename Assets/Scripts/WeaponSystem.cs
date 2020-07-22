@@ -28,7 +28,7 @@ public class WeaponSystem : MonoBehaviour
     void Update()
     {
         playerPos = new Vector2(transform.position.x, transform.position.y);
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        //mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
     IEnumerator Attacking()
     {
@@ -36,6 +36,7 @@ public class WeaponSystem : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && weaponAmount.Count <= 5)
             {
+                //mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 weaponObject = Instantiate(weapon, playerPos + new Vector2(0, 0.5f), Quaternion.identity);
                 weaponAmount.Add(weaponObject);
                 //yield return new WaitForSeconds(3f);

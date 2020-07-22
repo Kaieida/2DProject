@@ -5,13 +5,20 @@ using UnityEngine;
 public class WeaponLogic : MonoBehaviour
 {
     Rigidbody2D rb;
-    //Vector2 mousePos;
+    Vector2 mousePos;
+    public Camera cam;
     GameObject player;
 
-    
+    private void Awake()
+    {
+        cam = Camera.main;
+        //mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+    }
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         StartCoroutine(WeaponFlying());
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -21,10 +28,32 @@ public class WeaponLogic : MonoBehaviour
     }
     IEnumerator WeaponFlying()
     {
-        rb.AddForce(WeaponSystem.Instance.mousePos, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(1f);
-        rb.AddForce((player.transform.position-transform.position+new Vector3(0, 0.5f)) *2, ForceMode2D.Impulse);
+        float t = 0;
+        while (t < 1)
+        {
+            transform.Translate(mousePos * Time.deltaTime);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        Debug.Log("While ended");
+        t = 0;
+        while (t < 1)
+        {
+            transform.Translate(player.transform.position - transform.position * Time.deltaTime);
+            t += Time.deltaTime;
+            yield return null;
+        }
+ 
         StartCoroutine(DestroyWeapon());
+    }
+    private void Update()
+    {
+            //transform.Translate(mousePos * Time.deltaTime);
+    }
+    IEnumerator WeaponFlyingForward()
+    {
+        transform.Translate(mousePos * Time.deltaTime);
+        yield return new WaitForSeconds(1f);
     }
     IEnumerator DestroyWeapon()
     {
