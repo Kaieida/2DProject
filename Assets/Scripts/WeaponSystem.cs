@@ -39,6 +39,7 @@ public class WeaponSystem : MonoBehaviour
                 //mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 weaponObject = Instantiate(weapon, playerPos + new Vector2(0, 0.5f), Quaternion.identity);
                 weaponAmount.Add(weaponObject);
+                Debug.Log(weaponAmount.Count);
                 //yield return new WaitForSeconds(3f);
             }
             yield return null;
