@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class WeaponLogic : MonoBehaviour
 {
-    Rigidbody2D rb;
     Vector2 mousePos;
     public Camera cam;
     GameObject player;
     GameObject position;
-
+    bool isInPosition;
     private void Awake()
     {
         cam = Camera.main;
     }
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         StartCoroutine(WeaponFlying());
         player = GameObject.FindGameObjectWithTag("Player");
@@ -45,6 +43,8 @@ public class WeaponLogic : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
+        isInPosition = true;
+       
         if (WeaponSystem.Instance.weaponAmount.Count != 6)
         {
             StartCoroutine(DestroyWeapon());
@@ -69,13 +69,22 @@ public class WeaponLogic : MonoBehaviour
     }
     IEnumerator DestroyWeapon()
     {
-        //yield return new WaitForSeconds(3f);
-        /*if (WeaponSystem.Instance.weaponAmount.Count != 5)
-        {
-            Destroy(WeaponSystem.Instance.weaponObject);
-            weaponAmount.Remove(weaponObject);
-        }*/
         Destroy(this.gameObject);
+        yield return null;
+    }
+    IEnumerator HUJNJA()
+    {
+        foreach (GameObject obj in WeaponSystem.Instance.weaponAmount)
+        {
+            if (obj.GetComponent<WeaponLogic>().isInPosition)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
         yield return null;
     }
 }
