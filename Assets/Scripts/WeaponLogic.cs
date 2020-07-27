@@ -6,7 +6,6 @@ public class WeaponLogic : MonoBehaviour
 {
     Vector2 mousePos;
     public Camera cam;
-    GameObject player;
     GameObject position;
     bool isInPosition;
     private void Awake()
@@ -17,7 +16,6 @@ public class WeaponLogic : MonoBehaviour
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         StartCoroutine(WeaponFlying());
-        player = GameObject.FindGameObjectWithTag("Player");
         position = GameObject.Find(WeaponSystem.Instance.weaponAmount.Count.ToString());
     }
     private void OnDestroy()
@@ -33,19 +31,14 @@ public class WeaponLogic : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        float distance = 5;
         t = 0;
-        while (distance > 1.5)
+        while (t < 5)
         {
-            distance = Vector3.Distance(player.transform.position, transform.position);
-            transform.Translate((position.transform.position - transform.position) * Time.deltaTime);
-            Debug.Log(distance);
+            transform.Translate((position.transform.position - transform.position) * Time.deltaTime * 3);
             t += Time.deltaTime;
             yield return null;
         }
-        isInPosition = true;
-       
-        if (WeaponSystem.Instance.weaponAmount.Count != 6)
+        if (WeaponSystem.Instance.weaponAmount.Count != 4)
         {
             StartCoroutine(DestroyWeapon());
         }
@@ -56,11 +49,11 @@ public class WeaponLogic : MonoBehaviour
     }
     IEnumerator WeaponRotation()
     {
+        //transform.parent = position.transform;
         float t = 0;
         while (t < 5)
         {
-            transform.RotateAround(player.transform.position, new Vector3(0, 0, 1), 200 * Time.deltaTime);
-            Debug.Log("Rotating");
+            //position.transform.RotateAround(player.transform.position, new Vector3(0, 0, 1), 200 * Time.deltaTime);
             t += Time.deltaTime;
             yield return null;
         }

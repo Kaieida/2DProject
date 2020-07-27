@@ -34,7 +34,7 @@ public class WeaponSystem : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && weaponAmount.Count <= 5)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && weaponAmount.Count <= 3)
             {
                 //mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 weaponObject = Instantiate(weapon, playerPos + new Vector2(0, 0.5f), Quaternion.identity);
